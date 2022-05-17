@@ -1,0 +1,48 @@
+syntax = "proto3";
+package user;
+option go_package = "user";
+
+
+message AuthRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message AuthResp {
+    int64 status_code = 1;
+    string status_message = 2;
+    uint64 user_id = 3;
+}
+
+message CreateUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message CreateUserResponse {
+    int64 status_code = 1;
+    string status_message = 2;
+    uint64 user_id = 3;
+}
+
+message UserInfoRequest {
+    uint64 user_id = 1;
+    uint64 from_user_id = 2;
+}
+
+message UserInfoResponse {
+    int64 status_code = 1;
+    string status_msg = 2;
+    uint64 user_id = 3;
+    string username = 4;
+    uint64 follow_count = 5;
+    uint64 follower_count = 6;
+    bool is_follow = 7;
+
+}
+
+service UserService {
+    rpc AuthUser (AuthRequest) returns (AuthResp) {}
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
+    rpc UserInfo (UserInfoRequest) returns (UserInfoResponse) {}
+}
